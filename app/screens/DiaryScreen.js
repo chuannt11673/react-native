@@ -1,19 +1,27 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, StatusBar, Image, ScrollView, Dimensions } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, StatusBar, Dimensions, FlatList, Platform } from 'react-native'
 import { Icon } from 'react-native-elements'
-import AvatarComponent from '../components/AvatarComponent';
-import ImageGridComponent from '../components/ImageGridComponent';
 
+import AvatarComponent from '../components/AvatarComponent'
+import ImagesGridComponent from '../components/ImagesGridComponent'
 import colors from '../config/color'
 
 export default function DiaryScreen() {
     const [option, setOption] = useState(1);
-    const [images, setImages] = useState([
-        { uri: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' },
-        { uri: 'https://images.unsplash.com/photo-1496440737103-cd596325d314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' },
-        { uri: 'https://images.unsplash.com/photo-1545912452-8aea7e25a3d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60' }
-    ]);
-
+    const data = [
+        {
+            id: '1',
+            avatar: 'https://images.unsplash.com/photo-1496440737103-cd596325d314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+            name: 'Valeria',
+            message: '1 minute ago'
+        },
+        {
+            id: '2',
+            avatar: 'https://images.unsplash.com/photo-1472806426350-603610d85659?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+            name: 'Phương Linh',
+            message: '1 minute ago'
+        }
+    ];
     const optionHanler = (value) => {
         setOption(value);
     };
@@ -22,9 +30,20 @@ export default function DiaryScreen() {
             return styles.subHeaderTextActive;
         }
         return {};
-    }
-
-    
+    };
+    const renderData = (value) => {
+        const item = value.item;
+        return (
+            <View>
+                <AvatarComponent
+                    avatar={item.avatar}
+                    name={item.name}
+                    message={item.message}
+                />
+                <ImagesGridComponent />
+            </View>
+        );
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -38,13 +57,11 @@ export default function DiaryScreen() {
                 <Text style={[styles.subHeaderText, setActiveOption(1)]} onPress={() => optionHanler(1)}>Bảng Tin</Text>
                 <Text style={[styles.subHeaderText, setActiveOption(2)]} onPress={() => optionHanler(2)}>Top</Text>
             </View>
-            <ScrollView style={styles.content}>
-                <AvatarComponent
-                    avatar={"https://images.unsplash.com/photo-1496440737103-cd596325d314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"}
-                    name="Valerie"
-                    message="1 minute ago"
-                />
-            </ScrollView>
+            <FlatList
+                data={data}
+                renderItem={renderData}
+                keyExtractor={item => item.id}
+            />
         </SafeAreaView>
     )
 }
@@ -55,7 +72,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white
     },
     header: {
-        flex: 0.08,
+        height: 80,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.primary
@@ -75,7 +92,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     subHeader: {
-        flex: 0.06,
+        height: 50,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',

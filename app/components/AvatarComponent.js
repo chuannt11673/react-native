@@ -4,38 +4,20 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import colors from '../config/color'
 
 export default function AvatarComponent(props) {
-    return (
-        <View style={styles.contentItem}>
-            <Image source={{
-                uri: props.avatar
-            }}
-                style={styles.avatar}
-                resizeMode="cover"
-            />
-            <Text style={styles.contentName}>{props.name}</Text>
-            <Text numberOfLines={1} style={styles.contentMessage}>{props.message}</Text>
-            {
-                () => {
-                    if (props.displayTime) {
-                        return <Text style={styles.contentTime}></Text>
-                    }
-                    return null;
-                }
-            }
-            {
-                () => {
-                    if (props.displayBadge) {
-                        return <Text style={styles.contentBadge}></Text>
-                    }
-                    return null;
-                }
-            }
-        </View>
-    )
+	return (
+		<View style={styles.contentItem}>
+			<Image
+				source={{ uri: props.avatar }}
+				style={styles.avatar}
+			/>
+			<Text style={styles.contentName}>{props.name}</Text>
+			<Text numberOfLines={1} style={styles.contentMessage}>{props.message}</Text>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({
-    contentItem: {
+	contentItem: {
 		width: '100%',
 		height: 100,
 		flexDirection: 'row',
@@ -46,7 +28,7 @@ const styles = StyleSheet.create({
 		marginRight: 20,
 		width: 60,
 		height: 60,
-		borderRadius: 60,
+		borderRadius: 60
 	},
 	contentName: {
 		position: 'absolute',
