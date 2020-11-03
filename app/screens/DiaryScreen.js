@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, StatusBar, Dimensions, FlatList, Platform } from 'react-native'
 import { Icon } from 'react-native-elements'
+import ActionButtonsComponent from '../components/ActionButtonsComponent'
 
 import AvatarComponent from '../components/AvatarComponent'
 import ImagesGridComponent from '../components/ImagesGridComponent'
+import MaxLengthTextComponent from '../components/MaxLengthTextComponent'
 import colors from '../config/color'
 
 export default function DiaryScreen() {
@@ -49,6 +51,10 @@ export default function DiaryScreen() {
                         'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     ]}
                 />
+                <MaxLengthTextComponent
+                    text='Sự thật là… Chúng ta trốn vì muốn được tìm thấy. Chúng ta bỏ đi vì muốn biết ai sẽ theo mình. Chúng ta khóc để xem ai sẽ lau đi giọt lệ. Và chúng ta để trái tim tan vỡ, muốn thấy ai sẽ đến và chữa lành trái tim ta.'
+                />
+                <ActionButtonsComponent />
             </View>
         );
     };
