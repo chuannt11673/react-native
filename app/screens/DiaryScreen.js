@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, StatusBar, Dimensions, FlatList, Platform } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Dimensions, FlatList } from 'react-native'
 import { Icon } from 'react-native-elements'
 import ActionButtonsComponent from '../components/ActionButtonsComponent'
 
@@ -61,7 +61,6 @@ export default function DiaryScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar backgroundColor={colors.primary} />
             <View style={styles.header}>
                 <Icon name="menu" color={colors.white} containerStyle={styles.headerLeftIcon} />
                 <Text style={styles.headerText}>Colo</Text>

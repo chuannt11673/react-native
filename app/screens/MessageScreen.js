@@ -72,7 +72,6 @@ export default function MessageScreen() {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<StatusBar backgroundColor={colors.primary} />
 			<View style={styles.header}>
 				<Icon name="menu" color={colors.white} containerStyle={styles.headerLeftIcon} />
 				<Text style={styles.headerText}>Tin nhắn</Text>

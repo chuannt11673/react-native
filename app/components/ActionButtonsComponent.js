@@ -1,8 +1,10 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button } from 'react-native-elements'
+import { EvilIcons } from '@expo/vector-icons';
 
 import colors from '../config/color'
+import constants from '../shared/consts/CommonConsts'
 
 export default function ActionButtonsComponent() {
     return (
@@ -11,16 +13,37 @@ export default function ActionButtonsComponent() {
                 type='clear'
                 title='45'
                 titleStyle={styles.title}
+                icon={
+                    <EvilIcons
+                        name="heart"
+                        color={colors.secondary}
+                        size={constants.iconSize}
+                    />
+                }
             />
             <Button
                 type='clear'
                 title='12'
                 titleStyle={styles.title}
+                icon={
+                    <EvilIcons
+                        name="comment"
+                        size={constants.iconSize}
+                        color={colors.black}
+                    />
+                }
             />
             <Button
                 type='clear'
                 title='45'
                 titleStyle={styles.title}
+                icon={
+                    <EvilIcons
+                        name="share-google"
+                        size={constants.iconSize}
+                        color={colors.black}
+                    />
+                }
             />
         </View>
     )
@@ -35,8 +58,5 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.color
-    },
-    icon: {
-        marginRight: 3,
     }
 })

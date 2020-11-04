@@ -17,7 +17,7 @@ export default function MaxLengthTextComponent(props) {
 
         return (
             <TouchableOpacity onPress={onPressHandler}>
-                <Text style={styles.viewMoreText}>Xem thêm</Text>
+                <Text key={styles.viewMoreText} style={styles.viewMoreText}>Xem thêm</Text>
             </TouchableOpacity>
         )
     }

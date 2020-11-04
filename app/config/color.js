@@ -3,7 +3,7 @@ export default {
     secondary: '#f31a9f',
     black: '#000',
     white: '#fff',
-    color: 'rgba(120, 120, 120, 0.9)',
+    color: 'rgba(60, 60, 60, 1)',
     grey: '#d9d9d9',
     opacity5: 0.5,
     opacity6: 0.6,

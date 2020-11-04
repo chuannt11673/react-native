@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View, StatusBar, TouchableHighlight } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import colors from '../config/color';
 
 export default function WelcomeScreen() {
@@ -10,7 +10,6 @@ export default function WelcomeScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" />
             <ImageBackground
                 source={require("../assets/background.jpg")}
                 style={styles.backgroundImage}
