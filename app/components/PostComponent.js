@@ -1,10 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import ActionButtonsComponent from '../components/ActionButtonsComponent'
 
 import AvatarComponent from '../components/AvatarComponent'
 import ImagesGridComponent from '../components/ImagesGridComponent'
 import MaxLengthTextComponent from '../components/MaxLengthTextComponent'
+
+import colors from '../config/color'
 
 export default function PostComponent(props) {
     const renderAvatar = () => {
@@ -21,7 +23,7 @@ export default function PostComponent(props) {
         );
     }
     return (
-        <View key={props.id}>
+        <View key={props.id} style={styles.container}>
             {
                 renderAvatar()
             }
@@ -41,5 +43,12 @@ export default function PostComponent(props) {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        borderBottomColor: colors.grey,
+        borderBottomWidth: 1
+    }
+})
 
 

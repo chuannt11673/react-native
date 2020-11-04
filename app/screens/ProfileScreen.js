@@ -7,8 +7,11 @@ import colors from '../config/color'
 import { Button, ListItem } from 'react-native-elements';
 import PostComponent from '../components/PostComponent';
 
-export default function ProfileScreen(props) {
+export default function ProfileScreen() {
     const [avatarStyle, setAvatarStyle] = useState({});
+    const user = {
+        avatar: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'
+    }
     const data = [
         {
             id: '1',
@@ -19,7 +22,7 @@ export default function ProfileScreen(props) {
     ];
 
     useEffect(() => {
-        Image.getSize(props.avatar, (width, height) => {
+        Image.getSize(user.avatar, (width, height) => {
             const ratio = constants.windowWidth / width;
             setAvatarStyle({
                 width: width * ratio,
@@ -46,7 +49,7 @@ export default function ProfileScreen(props) {
         <ScrollView>
             <Image
                 source={{
-                    uri: props.avatar
+                    uri: user.avatar
                 }}
                 style={[avatarStyle]}
             />
