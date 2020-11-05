@@ -1,24 +1,21 @@
 import React from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { SimpleLineIcons } from '@expo/vector-icons';
+
 import colors from '../config/color';
+import constants from '../shared/consts/CommonConsts';
 
 export default function WelcomeScreen() {
-
-    const loginHandler = () => {
-        console.log('login tapped');
-    };
-
+    const image = require('../assets/in.png');
     return (
         <SafeAreaView style={styles.container}>
-            <ImageBackground
-                source={require("../assets/background.jpg")}
-                style={styles.backgroundImage}
-            >
-                <TouchableHighlight style={styles.loginButton} onPress={loginHandler}>
-                    <View>
-                        <Text style={styles.loginText}>Login</Text>
-                    </View>
-                </TouchableHighlight>
+            <ImageBackground source={image} style={styles.image}>
+                <View style={styles.loginView}>
+                    <TouchableOpacity>
+                        <SimpleLineIcons name="login" size={constants.iconSize} color={colors.white} />
+                    </TouchableOpacity>
+                    <Text style={styles.loginText}>Đăng nhập</Text>
+                </View>
             </ImageBackground>
         </SafeAreaView>
     )
@@ -27,28 +24,20 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
     },
-    backgroundImage: {
+    image: {
         flex: 1,
-        flexDirection: 'row',
-        resizeMode: 'cover',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
-    loginButton: {
-        height: 50,
-        backgroundColor: colors.primary,
-        borderRadius: 20,
-        alignSelf: 'flex-end',
-        bottom: 60,
-        flex: 0.8,
-        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        resizeMode: 'cover',
+    },
+    loginView: {
+        alignItems: 'center',
+        top: 100
     },
     loginText: {
         color: colors.white,
-        fontSize: 16
+        fontSize: 16,
+        padding: 5,
     }
 })

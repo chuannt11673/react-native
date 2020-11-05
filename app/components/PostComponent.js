@@ -39,7 +39,11 @@ export default function PostComponent(props) {
             <MaxLengthTextComponent
                 text='Sự thật là… Chúng ta trốn vì muốn được tìm thấy. Chúng ta bỏ đi vì muốn biết ai sẽ theo mình. Chúng ta khóc để xem ai sẽ lau đi giọt lệ. Và chúng ta để trái tim tan vỡ, muốn thấy ai sẽ đến và chữa lành trái tim ta.'
             />
-            <ActionButtonsComponent />
+            <ActionButtonsComponent
+                displayHeart='true'
+                displayComment='true'
+                displayShare='true'
+            />
         </View>
     )
 }

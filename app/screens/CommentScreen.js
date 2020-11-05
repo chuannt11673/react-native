@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { ListItem, Button } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import PostComponent from '../components/PostComponent';
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import ActionButtonsComponent from '../components/ActionButtonsComponent';
 
 import colors from '../config/color';
 import constants from '../shared/consts/CommonConsts';
@@ -61,36 +61,12 @@ export default function CommentScreen() {
         )
     }
     const renderButtons = () => {
-        const randomNumber = Math.floor(Math.random() * Math.floor(50));
         return (
-            <View style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingLeft: 20,
-                paddingRight: 20
-            }}>
-                <Text style={{ marginLeft: 75 }}>3 phút trước</Text>
-                <View style={{
-                    flexDirection: 'row'
-                }}>
-                    <Button
-                        title={randomNumber}
-                        titleStyle={styles.titleButton}
-                        buttonStyle={styles.button}
-                        icon={
-                            <AntDesign name="hearto" size={constants.iconSize} color={colors.secondary} />
-                        }
-                    />
-                    <Button
-                        buttonStyle={[styles.button, { top: 1 }]}
-                        icon={
-                            <MaterialCommunityIcons name="comment-processing-outline" size={24} color="black" />
-                        }
-                    />
-                </View>
-            </View>
+            <ActionButtonsComponent
+                displayHeart='true'
+                displayComment='true'
+                containerStyle={styles.buttons}
+            />
         )
     }
     const renderSubComment = (item, index) => {
@@ -172,11 +148,9 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 60
     },
-    titleButton: {
-        color: colors.color,
-        marginLeft: 3
-    },
-    button: {
-        backgroundColor: colors.white
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        width: '100%'
     }
 })
