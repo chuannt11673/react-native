@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, StatusBar, Image, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, StatusBar, Image, ScrollView, Platform } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import colors from '../config/color'
@@ -89,14 +89,15 @@ export default function MessageScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: colors.white
+		backgroundColor: colors.white,
 	},
 	header: {
 		flex: 0.08,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: colors.primary,
-		position: 'relative'
+		position: 'relative',
+		paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
 	},
 	headerText: {
 		fontSize: 18,

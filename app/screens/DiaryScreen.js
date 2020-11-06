@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, Dimensions, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Dimensions, FlatList, Platform, StatusBar } from 'react-native'
 import { Icon } from 'react-native-elements'
 import ActionButtonsComponent from '../components/ActionButtonsComponent'
 
@@ -36,7 +36,7 @@ export default function DiaryScreen({ navigation }) {
     };
     const pressHanler = (event) => {
         if (event === 'comment') {
-            navigation.navigate('Welcome');
+            navigation.navigate('Comment');
         }
     }
     const renderData = (value) => {
@@ -96,13 +96,14 @@ export default function DiaryScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
     header: {
         height: 80,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.primary
+        backgroundColor: colors.primary,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     headerText: {
         fontSize: 20,

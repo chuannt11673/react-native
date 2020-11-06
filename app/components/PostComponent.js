@@ -8,22 +8,28 @@ import MaxLengthTextComponent from '../components/MaxLengthTextComponent'
 
 import colors from '../config/color'
 
-export default function PostComponent(props) {
+export default function PostComponent({
+    id,
+    avatar,
+    name,
+    message,
+    containerStyle
+}) {
     const renderAvatar = () => {
-        if (!props.avatar) {
+        if (!avatar) {
             return null;
         }
 
         return (
             <AvatarComponent
-                avatar={props.avatar}
-                name={props.name}
-                message={props.message}
+                avatar={avatar}
+                name={name}
+                message={message}
             />
         );
     }
     return (
-        <View key={props.id} style={styles.container}>
+        <View key={id} style={[styles.container, containerStyle]}>
             {
                 renderAvatar()
             }
@@ -50,8 +56,9 @@ export default function PostComponent(props) {
 
 const styles = StyleSheet.create({
     container: {
+        borderBottomWidth: 1,
         borderBottomColor: colors.grey,
-        borderBottomWidth: 1
+        backgroundColor: colors.white
     }
 })
 

@@ -4,16 +4,22 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 
 import colors from '../config/color';
 import constants from '../shared/consts/CommonConsts';
+import AuthContext from '../shared/contexts/AuthContext';
 
-export default function WelcomeScreen({ navigation }) {
-    const image = require('../assets/in.png');
+export default function WelcomeScreen() {
+    const { signIn } = React.useContext(AuthContext);
+    const credential = {
+        username: 'Tien',
+        password: 'Nguyen'
+    }
+
     const loginHandler = () => {
-        navigation.navigate('Home');
+        signIn(credential);
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <ImageBackground source={image} style={styles.image}>
+            <ImageBackground source={require('../assets/in.png')} style={styles.image}>
                 <View style={styles.loginView}>
                     <TouchableOpacity onPress={loginHandler}>
                         <SimpleLineIcons name="login" size={constants.iconSize} color={colors.white} />

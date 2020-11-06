@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderBottomColor: colors.grey,
         borderBottomWidth: 1,
+        backgroundColor: colors.white
     },
     contentText: {
         fontSize: 19,
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
         padding: 30,
         borderBottomColor: colors.grey,
         borderBottomWidth: 1,
+        backgroundColor: colors.white
     },
     moreInfoText: {
         fontSize: 18,

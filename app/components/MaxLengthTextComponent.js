@@ -46,10 +46,9 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     containerText: {
-        color: colors.black,
+        color: colors.color,
         fontSize: 16,
-        opacity: color.opacity8,
-        lineHeight: 21
+        lineHeight: 21,
     },
     viewMoreText: {
         top: 5,

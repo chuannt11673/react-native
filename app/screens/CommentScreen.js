@@ -72,9 +72,9 @@ export default function CommentScreen() {
     const renderSubComment = (item, index) => {
         return (
             <ListItem key={index} containerStyle={[styles.listItem, {
-                marginLeft: 30
+                marginLeft: 30,
             }]}>
-                <View style={styles.commentView}>
+                <View style={[styles.commentView]}>
                     {
                         renderAvatar(item.avatar)
                     }
@@ -115,6 +115,7 @@ export default function CommentScreen() {
     return (
         <ScrollView>
             <PostComponent />
+            <View style={{ width: '100%', height: 15, backgroundColor: colors.white }} />
             {
                 data.map((item, index) => renderComment(item, index))
             }
@@ -131,7 +132,6 @@ const styles = StyleSheet.create({
     commentView: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        paddingTop: 15,
     },
     contentItem: {
         justifyContent: 'flex-start',

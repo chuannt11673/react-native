@@ -51,7 +51,6 @@ export default function ImagesGridComponent(props) {
                 ...coverImageStyle,
                 width: customStyles[1].width,
                 height: customStyles[1].height,
-                backgroundColor: colors.grey
             };
             setCoverImageStyle(coverStyle);
         });
