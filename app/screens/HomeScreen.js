@@ -1,12 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import HomeNavigator from '../routes/HomeNavigator'
 
 export default function HomeScreen() {
     return (
-        <View>
-            <Text></Text>
-        </View>
+        <HomeNavigator />
     )
 }
-
-const styles = StyleSheet.create({})

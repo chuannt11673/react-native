@@ -8,7 +8,8 @@ import ImagesGridComponent from '../components/ImagesGridComponent'
 import MaxLengthTextComponent from '../components/MaxLengthTextComponent'
 import colors from '../config/color'
 
-export default function DiaryScreen() {
+export default function DiaryScreen({ navigation }) {
+
     const [option, setOption] = useState(1);
     const data = [
         {
@@ -33,6 +34,11 @@ export default function DiaryScreen() {
         }
         return {};
     };
+    const pressHanler = (event) => {
+        if (event === 'comment') {
+            navigation.navigate('Welcome');
+        }
+    }
     const renderData = (value) => {
         const item = value.item;
         return (
@@ -54,7 +60,15 @@ export default function DiaryScreen() {
                 <MaxLengthTextComponent
                     text='Sự thật là… Chúng ta trốn vì muốn được tìm thấy. Chúng ta bỏ đi vì muốn biết ai sẽ theo mình. Chúng ta khóc để xem ai sẽ lau đi giọt lệ. Và chúng ta để trái tim tan vỡ, muốn thấy ai sẽ đến và chữa lành trái tim ta.'
                 />
-                <ActionButtonsComponent />
+                <ActionButtonsComponent
+                    displayHeart='true'
+                    displayComment='true'
+                    displayShare='true'
+                    containerStyle={styles.containerStyleButtons}
+                    onPress={
+                        pressHanler
+                    }
+                />
             </View>
         );
     };
@@ -130,5 +144,9 @@ const styles = StyleSheet.create({
     contentImages: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').width
+    },
+    containerStyleButtons: {
+        borderBottomColor: colors.grey,
+        borderBottomWidth: 1
     }
 })

@@ -1,17 +1,21 @@
 import React from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 
 import colors from '../config/color';
 import constants from '../shared/consts/CommonConsts';
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({ navigation }) {
     const image = require('../assets/in.png');
+    const loginHandler = () => {
+        navigation.navigate('Home');
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <ImageBackground source={image} style={styles.image}>
                 <View style={styles.loginView}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={loginHandler}>
                         <SimpleLineIcons name="login" size={constants.iconSize} color={colors.white} />
                     </TouchableOpacity>
                     <Text style={styles.loginText}>Đăng nhập</Text>

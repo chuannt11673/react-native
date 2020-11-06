@@ -6,10 +6,22 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import colors from '../config/color'
 import constants from '../shared/consts/CommonConsts'
 
-export default function ActionButtonsComponent(props) {
+export default function ActionButtonsComponent({
+    displayHeart,
+    displayComment,
+    displayShare,
+    containerStyle,
+    onPress
+}) {
+
+    if (!onPress) {
+        onPress = (event) => {
+            console.log('Please handler press event');
+        }
+    }
 
     const renderHeart = () => {
-        if (props.displayHeart) {
+        if (displayHeart) {
             return (
                 <Button
                     title='45'
@@ -18,13 +30,16 @@ export default function ActionButtonsComponent(props) {
                     icon={
                         <SimpleLineIcons name="heart" size={constants.iconSize} color={colors.secondary} />
                     }
+                    onPress={
+                        () => onPress('like')
+                    }
                 />
             )
         }
         return null;
     }
     const renderComment = () => {
-        if (props.displayComment) {
+        if (displayComment) {
             return (
                 <Button
                     title='12'
@@ -33,13 +48,16 @@ export default function ActionButtonsComponent(props) {
                     icon={
                         <SimpleLineIcons name="bubbles" size={constants.iconSize} color={colors.color} />
                     }
+                    onPress={
+                        () => onPress('comment')
+                    }
                 />
             )
         }
         return null;
     }
     const renderShare = () => {
-        if (props.displayShare) {
+        if (displayShare) {
             return (
                 <Button
                     type='clear'
@@ -49,6 +67,9 @@ export default function ActionButtonsComponent(props) {
                     icon={
                         <SimpleLineIcons name="cursor" size={constants.iconSize} color={colors.color} />
                     }
+                    onPress={
+                        () => onPress('share')
+                    }
                 />
             )
         }
@@ -56,7 +77,7 @@ export default function ActionButtonsComponent(props) {
     }
 
     return (
-        <View style={[styles.container, props.containerStyle]}>
+        <View style={[styles.container, containerStyle]}>
             {
                 renderHeart()
             }
