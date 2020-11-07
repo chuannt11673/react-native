@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, Dimensions, FlatList, Platform, StatusBar } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Dimensions, FlatList, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import ActionButtonsComponent from '../components/ActionButtonsComponent'
 
 import AvatarComponent from '../components/AvatarComponent'
 import ImagesGridComponent from '../components/ImagesGridComponent'
 import MaxLengthTextComponent from '../components/MaxLengthTextComponent'
+import StatusBarComponent from '../components/StatusBarComponent'
 import colors from '../config/color'
+import CommonConsts from '../shared/consts/CommonConsts'
 
 export default function DiaryScreen({ navigation }) {
 
@@ -25,12 +27,12 @@ export default function DiaryScreen({ navigation }) {
             message: '1 minute ago'
         }
     ];
-    const optionHanler = (value) => {
-        setOption(value);
-    };
-    const setActiveOption = (value) => {
+    const getActiveStyle = (value) => {
         if (option === value) {
-            return styles.subHeaderTextActive;
+            return {
+                borderBottomColor: colors.white,
+                borderBottomWidth: 3
+            }
         }
         return {};
     };
@@ -74,22 +76,39 @@ export default function DiaryScreen({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Icon name="menu" color={colors.white} containerStyle={styles.headerLeftIcon} />
-                <Text style={styles.headerText}>Colo</Text>
-                <Icon name="notifications" color={colors.white} containerStyle={styles.headerRightIcon} />
-            </View>
-            <View style={styles.subHeader}>
-                <Text style={[styles.subHeaderText, setActiveOption(1)]} onPress={() => optionHanler(1)}>Bảng Tin</Text>
-                <Text style={[styles.subHeaderText, setActiveOption(2)]} onPress={() => optionHanler(2)}>Top</Text>
-            </View>
-            <FlatList
-                data={data}
-                renderItem={renderData}
-                keyExtractor={item => item.id}
+        <>
+            <StatusBarComponent
+                barStyle='light-content'
             />
-        </SafeAreaView>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.header}>
+                    <Icon name="menu" color={colors.white} containerStyle={styles.headerLeftIcon} />
+                    <Text style={styles.headerText}>Colo</Text>
+                    <Icon name="notifications" color={colors.white} containerStyle={styles.headerRightIcon} />
+                </View>
+                <View style={styles.subHeader}>
+                    <TouchableOpacity onPress={
+                        () => setOption(1)
+                    }>
+                        <View style={[styles.subHeaderView, getActiveStyle(1)]}>
+                            <Text style={styles.subHeaderText}>Bảng tin</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={
+                        () => setOption(2)
+                    }>
+                        <View style={[styles.subHeaderView, getActiveStyle(2)]}>
+                            <Text style={styles.subHeaderText}>Top</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <FlatList
+                    data={data}
+                    renderItem={renderData}
+                    keyExtractor={item => item.id}
+                />
+            </SafeAreaView>
+        </>
     )
 }
 
@@ -99,11 +118,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     header: {
-        height: 80,
+        height: 44,
+        backgroundColor: colors.primary,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.primary,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     headerText: {
         fontSize: 20,
@@ -120,27 +138,21 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     subHeader: {
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        height: 36,
         backgroundColor: colors.primary,
-        paddingBottom: 10
+        flexDirection: 'row'
+    },
+    subHeaderView: {
+        width: CommonConsts.windowWidth / 2,
+        height: 36,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
     subHeaderText: {
-        width: '30%',
-        color: colors.white,
-        fontSize: 16,
-        textAlign: 'center',
-        paddingBottom: 10
-    },
-    subHeaderTextActive: {
-        borderBottomWidth: 2,
-        borderBottomColor: colors.grey
+        color: colors.white
     },
     content: {
-        flex: 0.92,
-        backgroundColor: colors.white
+        flex: 0.92
     },
     contentImages: {
         width: Dimensions.get('window').width,

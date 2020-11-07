@@ -57,8 +57,7 @@ export default function PostComponent({
 const styles = StyleSheet.create({
     container: {
         borderBottomWidth: 1,
-        borderBottomColor: colors.grey,
-        backgroundColor: colors.white
+        borderBottomColor: colors.grey
     }
 })
 

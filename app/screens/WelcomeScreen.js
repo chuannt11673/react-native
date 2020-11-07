@@ -5,6 +5,7 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import colors from '../config/color';
 import constants from '../shared/consts/CommonConsts';
 import AuthContext from '../shared/contexts/AuthContext';
+import StatusBarComponent from '../components/StatusBarComponent';
 
 export default function WelcomeScreen() {
     const { signIn } = React.useContext(AuthContext);
@@ -18,22 +19,27 @@ export default function WelcomeScreen() {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ImageBackground source={require('../assets/in.png')} style={styles.image}>
-                <View style={styles.loginView}>
-                    <TouchableOpacity onPress={loginHandler}>
-                        <SimpleLineIcons name="login" size={constants.iconSize} color={colors.white} />
-                    </TouchableOpacity>
-                    <Text style={styles.loginText}>Đăng nhập</Text>
-                </View>
-            </ImageBackground>
-        </SafeAreaView>
+        <>
+            <StatusBarComponent
+                barStyle='light-content'
+            />
+            <View style={styles.container}>
+                <ImageBackground source={require('../assets/in.png')} style={styles.image}>
+                    <View style={styles.loginView}>
+                        <TouchableOpacity onPress={loginHandler} style={{ alignItems: 'center' }}>
+                            <SimpleLineIcons name="login" size={constants.iconSize} color={colors.white} />
+                            <Text style={styles.loginText}>Đăng nhập</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ImageBackground>
+            </View>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     image: {
         flex: 1,

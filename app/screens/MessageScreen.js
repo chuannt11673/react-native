@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, StatusBar, Image, ScrollView, Platform } from 'react-native'
+import { Text, View, Image, ScrollView, SafeAreaView, StyleSheet } from 'react-native'
 import { Icon } from 'react-native-elements'
-
+import StatusBarComponent from '../components/StatusBarComponent'
 import colors from '../config/color'
 
 export default function MessageScreen() {
-	const [messages, setMessages] = useState([
+	const [messages] = useState([
 		{
 			avatar: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
 			name: 'Phương Ly',
@@ -51,8 +51,7 @@ export default function MessageScreen() {
 			name: 'Trang',
 			message: 'Tối nay 10h em mới đi khách về, hẹn anh 8h nhé :D'
 		}
-	]);
-
+	])
 	const renderMessage = (message, index) => {
 		return (
 			<View key={index} style={styles.contentItem}>
@@ -65,24 +64,30 @@ export default function MessageScreen() {
 				<Text style={styles.contentName}>{message.name}</Text>
 				<Text numberOfLines={1} style={styles.contentMessage}>{message.message}</Text>
 				<Text style={styles.contentTime}>11:31 AM</Text>
-				<Text style={styles.contentBadge}>2</Text>
+				<View style={styles.contentBadge}>
+					<Text style={{ color: colors.white }}>2</Text>
+				</View>
 			</View>
-		);
-	};
-
+		)
+	}
 	return (
-		<SafeAreaView style={styles.container}>
-			<View style={styles.header}>
-				<Icon name="menu" color={colors.white} containerStyle={styles.headerLeftIcon} />
-				<Text style={styles.headerText}>Tin nhắn</Text>
-				<Icon name="notifications" color={colors.white} containerStyle={styles.headerRightIcon} />
-			</View>
-			<ScrollView style={styles.content}>
-				{
-					messages.map((item, index) => renderMessage(item, index))
-				}
-			</ScrollView>
-		</SafeAreaView>
+		<>
+			<StatusBarComponent
+                barStyle='light-content'
+            />
+			<SafeAreaView style={styles.container}>
+				<View style={styles.header}>
+					<Icon name="menu" color={colors.white} containerStyle={styles.headerLeftIcon} />
+					<Text style={styles.headerText}>Tin nhắn</Text>
+					<Icon name="notifications" color={colors.white} containerStyle={styles.headerRightIcon} />
+				</View>
+				<ScrollView style={styles.content}>
+					{
+						messages.map((item, index) => renderMessage(item, index))
+					}
+				</ScrollView>
+			</SafeAreaView>
+		</>
 	)
 }
 
@@ -92,12 +97,10 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.white,
 	},
 	header: {
-		flex: 0.08,
-		justifyContent: 'center',
-		alignItems: 'center',
+		height: 44,
 		backgroundColor: colors.primary,
-		position: 'relative',
-		paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	headerText: {
 		fontSize: 18,
@@ -114,8 +117,7 @@ const styles = StyleSheet.create({
 		marginLeft: 20
 	},
 	content: {
-		flex: 0.92,
-		backgroundColor: colors.white
+		flex: 0.92
 	},
 	contentItem: {
 		width: '100%',
@@ -158,9 +160,10 @@ const styles = StyleSheet.create({
 		right: 20,
 		width: 30,
 		backgroundColor: colors.secondary,
-		color: colors.white,
 		textAlign: "center",
 		borderRadius: 12,
-		padding: 2
+		padding: 2,
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 })

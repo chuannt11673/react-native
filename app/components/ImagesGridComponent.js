@@ -4,30 +4,30 @@ import { StyleSheet, View, Image, Text } from 'react-native'
 import colors from '../config/color'
 import commonConsts from '../shared/consts/CommonConsts'
 
-export default function ImagesGridComponent(props) {
-    const [imageStyles, setImageStyles] = useState(props.images.map(_ => {
+export default function ImagesGridComponent({ images }) {
+    const [gridStyle, setGridStyle] = useState(styles.gridHorizontal);
+    const [imageStyles, setImageStyles] = useState(images.map(_ => {
         return {};
     }));
     const [coverImageStyle, setCoverImageStyle] = useState({
-        width: 0,
-        height: 0,
         bottom: 0,
         right: 0,
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        opacity: 0.7
+        opacity: colors.opacity5,
+        backgroundColor: colors.white
     });
     const render = (item, index) => {
         return (
-            <Image key={index} style={[styles.item, imageStyles[index]]} source={{ uri: item }}/>
+            <Image key={index} style={[imageStyles[index]]} source={{ uri: item }}/>
         )
     }
     const renderCoverImage = () => {
-        if (props.images.length > 4) {
+        if (images.length > 4) {
             return (
                 <View style={coverImageStyle}>
-                    <Text style={{ color: colors.black, fontSize: 19, fontWeight: 'bold', opacity: 0.5 }}>+{props.images.length - 4}</Text>
+                    <Text style={{ color: colors.black, fontSize: 19, fontWeight: 'bold', opacity: 0.5 }}>+{images.length - 4}</Text>
                 </View>
             )
         }
@@ -35,18 +35,34 @@ export default function ImagesGridComponent(props) {
     }
     const getStyle = (index, selectMode) => {
         if (selectMode === mode.horizontal) {
-            return getHorizontalStyle(props.images.length - 1, index);
+            return getHorizontalStyle(images.length - 1, index);
         }
 
-        return getVerticalStyle(props.images.length - 1, index);
+        return getVerticalStyle(images.length - 1, index);
     }
     const onInit = () => {
-        Image.getSize(props.images[0], (width, height) => {
+        Image.getSize(images[0], (width, height) => {
+            if (images.length === 1) {
+                const ratio = commonConsts.windowWidth / width;
+                setImageStyles([{
+                    width: commonConsts.windowWidth,
+                    height: height * ratio,
+                    borderColor: colors.white,
+                    borderWidth: 1
+                }]);
+                setGridStyle({
+                    ...gridStyle,
+                    height: height * ratio
+                })
+                return;
+            }
+
             const selectMode = width < height ? mode.horizontal : mode.vertical;
-            const customStyles = props.images.map((item, index) => {
+            const customStyles = images.map((item, index) => {
                 return getStyle(index, selectMode);
             });
             setImageStyles(customStyles);
+
             const coverStyle = {
                 ...coverImageStyle,
                 width: customStyles[1].width,
@@ -61,9 +77,9 @@ export default function ImagesGridComponent(props) {
     }, [])
     
     return (
-        <View style={styles.gridHorizontal}>
+        <View style={gridStyle}>
             {
-                props.images.map((item, index) => render(item, index))
+                images.map((item, index) => render(item, index))
             }
             {
                 renderCoverImage()
@@ -78,7 +94,6 @@ const styles = StyleSheet.create({
     gridHorizontal: {
         width: '100%',
         height: gridHeight,
-            
     }
 })
 

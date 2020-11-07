@@ -1,18 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
 import HomeStack from './app/routes/HomeStack';
 import SignInStack from './app/routes/SignInStack';
-
 import AuthContext from './app/shared/contexts/AuthContext';
-import { StatusBar } from 'expo-status-bar';
 
 const Context = AuthContext;
 
 export default function App() {
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
-      console.log(action);
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -40,7 +36,6 @@ export default function App() {
       userToken: null
     }
   )
-
   const authContext = React.useMemo(() => ({
     signIn: async data => {
       dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
@@ -56,7 +51,6 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style='auto' />
       <Context.Provider value={authContext}>
         <NavigationContainer>
           {
@@ -71,5 +65,3 @@ export default function App() {
     </>
   );
 }
-
-

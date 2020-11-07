@@ -6,6 +6,7 @@ import ActionButtonsComponent from '../components/ActionButtonsComponent';
 
 import colors from '../config/color';
 import constants from '../shared/consts/CommonConsts';
+import StatusBarComponent from '../components/StatusBarComponent';
 
 export default function CommentScreen() {
     const [data, setData] = useState([
@@ -39,7 +40,6 @@ export default function CommentScreen() {
             ]
         }
     ]);
-
     const renderAvatar = (uri) => {
         return (
             <Image
@@ -113,17 +113,31 @@ export default function CommentScreen() {
     }
 
     return (
-        <ScrollView>
-            <PostComponent />
-            <View style={{ width: '100%', height: 15, backgroundColor: colors.white }} />
-            {
-                data.map((item, index) => renderComment(item, index))
-            }
-        </ScrollView>
+        <>
+            <StatusBarComponent
+                containerStyle={{
+                    backgroundColor: colors.white,
+                    height: 0
+                }}
+                barStyle='dark-content'
+            />
+            <ScrollView style={styles.container}>
+
+                <PostComponent />
+                <View style={{ width: '100%', height: 15, backgroundColor: colors.white }} />
+                {
+                    data.map((item, index) => renderComment(item, index))
+                }
+            </ScrollView>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colors.white
+    },
     listItem: {
         padding: 0,
         margin: 0,
