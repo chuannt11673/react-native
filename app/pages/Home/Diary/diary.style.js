@@ -6,7 +6,16 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: BrandColor.white
     },
+    item: {
+        paddingBottom: 10,
+        borderBottomColor: BrandColor.borderColor,
+        borderBottomWidth: 1
+    },
     content: {
         padding: 10
+    },
+    action: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     }
 })
