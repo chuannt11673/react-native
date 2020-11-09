@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 import AvatarComponent from '../../../components/Avatar/avatar.component';
 import ImageGridComponent from '../../../components/ImageGrid/image-grid.component';
 import { getDiary } from '../../../utils/services/diary.service';
@@ -19,6 +19,9 @@ export default function Diary() {
             <View>
                 <AvatarComponent uri={item.avatar} name={item.name} />
                 <ImageGridComponent images={item.photos} />
+                <View style={styles.content}>
+                    <Text>{item.content}</Text>
+                </View>
             </View>
         )
     }

@@ -3,14 +3,14 @@ import { View, Image, Dimensions } from 'react-native';
 import { styles } from './image-grid.style';
 
 const windowWidth = Dimensions.get('window').width;
-const maxHeight = Dimensions.get('window').height * 0.4;
+const maxHeight = Dimensions.get('window').height * 0.5;
 const percentage = 0.6;
 const modes = {
     horizontal: 1,
     vertical: 2
 };
 export default function ImageGridComponent({ images }) {
-    const [mode, setMode] = useState();
+    let mode = modes.horizontal;
     const [itemStyles, setItemStyles] = useState(images.map(_ => {
         return {}
     }));
@@ -21,8 +21,9 @@ export default function ImageGridComponent({ images }) {
     useEffect(() => {
         Image.getSize(images[0], (w,h) => {
             if (w <= h) {
-                setMode(modes.vertical);
+                mode = modes.vertical;
             }
+
             if (images.length === 1) {
                 setItemStyles([{ width: windowWidth, height: h * windowWidth / w }])
             } else {
@@ -31,6 +32,8 @@ export default function ImageGridComponent({ images }) {
                 });
                 setItemStyles(imageStyles);
             }
+        }, err => {
+            throw err;
         })
     }, []);
 
