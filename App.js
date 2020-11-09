@@ -1,13 +1,53 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import AuthContext from './app/utils/context/auth.context';
+import HomeStack from './app/routes/HomeStack';
+import AuthStack from './app/routes/AuthStack';
+
+const Context = AuthContext;
 
 export default function App() {
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            userToken: action.token
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            userToken: null
+          };
+      }
+    },
+    {
+      userToken: null
+    }
+  );
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async data => {
+        dispatch({ type: 'SIGN_IN', token: 'dummy_token' });
+      },
+      signOut: () => {
+        dispatch({ type: 'SIGN_OUT' })
+      }
+    }),
+    []
+  );
+
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Hello world</Text>
-      </View>
-    </>
+    <Context.Provider value={authContext}>
+      <NavigationContainer>
+        {
+          !state.userToken ? <HomeStack /> : <AuthStack />
+        }
+      </NavigationContainer>
+    </Context.Provider> 
   )
 }
 
