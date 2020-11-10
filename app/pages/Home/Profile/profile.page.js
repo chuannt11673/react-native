@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { styles } from './profile.style';
 import * as profileService from '../../../utils/services/profile.service';
 import ImageComponent from '../../../components/Image/image.component';
@@ -55,6 +55,9 @@ export default function Profile() {
                         }
                     </View>
                 </View>
+                {
+                    data.photos.map((item, index) => <ImageComponent key={index} uri={item} />)
+                }
             </>
         )
     }
