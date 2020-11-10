@@ -39,7 +39,7 @@ export default function Diary({ navigation }) {
                             <SimpleLineIcons name="bubbles" size={21} color={BrandColor.black} />
                         }
                         onPress={
-                            () => navigation.navigate('Comment')
+                            () => navigation.navigate('Comment', { item: item })
                         }
                     />
                     <ButtonComponent

@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: BrandColor.white,
-        paddingTop: 10
     },
     item: {
         flexDirection: 'row',
@@ -36,6 +35,15 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginTop: -5
+    },
+    time: {
+        marginLeft: 95,
+        fontSize: 13
+    },
+    viewMoreComments: {
+        marginLeft: 90,
+        fontSize: 14,
+        color: BrandColor.secondary
     },
     subItem: {
         marginLeft: subItemDistance,
