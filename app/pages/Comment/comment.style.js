@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
         marginTop: -5
     },
     time: {
-        marginLeft: 95,
+        marginLeft: 90,
         fontSize: 13
     },
     viewMoreComments: {

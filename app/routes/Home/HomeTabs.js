@@ -5,6 +5,7 @@ import Message from '../../pages/Home/Message/message.page';
 import Diary from '../../pages/Home/Diary/diary.page';
 import Dating from '../../pages/Home/Dating/dating.page';
 import Profile from '../../pages/Home/Profile/profile.page';
+import { BrandColor } from '../../utils/contants/colors.const';
 
 const Tab = createBottomTabNavigator()
 
@@ -16,6 +17,7 @@ export default function HomeTabs() {
         ({ route }) => ({
           tabBarIcon: ({ focused }) => {
             let iconName;
+            let color = focused ? BrandColor.secondary : BrandColor.black;
             switch (route.name) {
                 case 'Message':
                     iconName = 'bubbles';
@@ -29,7 +31,7 @@ export default function HomeTabs() {
                 case 'Profile':
                     iconName = 'user';
             }
-            return <SimpleLineIcons name={iconName} size={21} />
+            return <SimpleLineIcons name={iconName} size={21} color={color} />
           }
         })
       }
