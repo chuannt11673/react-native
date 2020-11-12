@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import AvatarComponent from '../../../components/Avatar/avatar.component';
 import ButtonComponent from '../../../components/Button/button.component';
 import ImageGridComponent from '../../../components/ImageGrid/image-grid.component';
@@ -8,6 +8,7 @@ import { getDiary } from '../../../utils/services/diary.service';
 import { styles } from './diary.style';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { BrandColor } from '../../../utils/contants/colors.const';
+import { Fontisto, Ionicons } from '@expo/vector-icons';
 
 export default function Diary({ navigation }) {
     const [data, setData] = useState([]);
@@ -17,10 +18,9 @@ export default function Diary({ navigation }) {
         })
     }, []);
 
-    const renderItem = (value) => {
-        const item = value.item;
+    const renderItem = (item, index) => {
         return (
-            <View style={styles.item}>
+            <View key={index} style={styles.item}>
                 <AvatarComponent uri={item.avatar} name={item.name} />
                 <ImageGridComponent images={item.photos} />
                 <View style={styles.content}>
@@ -54,12 +54,41 @@ export default function Diary({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={data}
-                keyExtractor={item => item.id}
-                renderItem={renderItem}
-            />
-        </View>
+        <ScrollView style={styles.container}>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={
+                    () => {
+                        navigation.navigate('CreatePost');
+                    }
+                }>
+                    <View style={styles.headerAvatar}>
+                        <AvatarComponent
+                            uri='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                        />
+                        <Text style={styles.headerText}>Hôm nay bạn thế nào?</Text>
+                    </View>
+                </TouchableOpacity>
+                
+                <View style={styles.headerActions}>
+                    <ButtonComponent
+                        containerStyle={styles.headerContainer}
+                        title='Photo'
+                        icon={
+                            <Fontisto name="photograph" size={24} color="#00b300" />
+                        }
+                    />
+                    <ButtonComponent
+                        containerStyle={styles.headerContainer}
+                        title='Video'
+                        icon={
+                            <Ionicons name="md-videocam" size={24} color="#ff1ac6" />
+                        }
+                    />
+                </View>
+            </View>
+            {
+                data.map((item, index) => renderItem(item, index))
+            }
+        </ScrollView>
     )
 }

@@ -7,9 +7,14 @@ export default function AvatarComponent({ uri, name, content }) {
         <View style={itemStyles.item}>
             <Image source={{ uri: uri }} style={itemStyles.avatar} />
             <View>
-                <Text style={itemStyles.name}>
-                    {name}
-                </Text>
+                {
+                    name ? (
+                        <Text style={itemStyles.name}>
+                            {name}
+                        </Text>
+                    ) : null
+                }
+
                 {
                     content ? (
                         <Text numberOfLines={1} style={itemStyles.message}>

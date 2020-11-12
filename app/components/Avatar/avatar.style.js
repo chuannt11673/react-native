@@ -13,7 +13,6 @@ export const itemStyles = StyleSheet.create({
     backgroundColor: BrandColor.white
   },
   item: {
-    width: windowWidth,
     height: 80,
     flexDirection: 'row',
     alignItems: 'center',
