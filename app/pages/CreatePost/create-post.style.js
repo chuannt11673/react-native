@@ -26,6 +26,9 @@ export const styles = StyleSheet.create({
         paddingTop: 2,
         paddingBottom: 2,
     },
+    buttonTitle: {
+        fontSize: 13
+    },
     headerButtons: {
         flexDirection: 'row',
         justifyContent: 'space-around'
@@ -35,5 +38,21 @@ export const styles = StyleSheet.create({
     },
     textInput: {
         fontSize: 15
+    },
+    tagsContainer: {
+        flexDirection: 'row',
+        padding: 15
+    },
+    addImageButton: {
+        borderColor: '#00b300'
+    },
+    addImageTitle: {
+        color: '#00b300'
+    },
+    tagButton: {
+        borderColor: '#ffa31a'
+    },
+    tagTitle: {
+        color: '#ffa31a'
     }
 })

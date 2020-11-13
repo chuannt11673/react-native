@@ -7,13 +7,13 @@ import Dating from '../../pages/Home/Dating/dating.page';
 import Profile from '../../pages/Home/Profile/profile.page';
 import { BrandColor } from '../../utils/contants/colors.const';
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 export default function HomeTabs() {
 
   return (
     <Tab.Navigator
-      screenOptions={
+      screenOptions={                
         ({ route }) => ({
           tabBarIcon: ({ focused }) => {
             let iconName;
@@ -32,7 +32,7 @@ export default function HomeTabs() {
                     iconName = 'user';
             }
             return <SimpleLineIcons name={iconName} size={21} color={color} />
-          }
+          }               
         })
       }
     >

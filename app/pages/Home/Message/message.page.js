@@ -4,9 +4,9 @@ import { getMessages } from '../../../utils/services/message.service';
 import { styles, itemStyles } from './message.style';
 import Moment from 'moment';
 
-export default function Message() {
+export default function Message({ navigation }) {
     const [data, setData] = useState([]);
-
+    
     useEffect(() => {
         getMessages(1).subscribe(res => {
             setData(res);
