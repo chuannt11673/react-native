@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
 import { Text, View } from 'react-native';
 import AvatarComponent from '../../components/Avatar/avatar.component';
 import ButtonComponent from '../../components/Button/button.component';
@@ -101,15 +101,18 @@ export default function Comment({ route }) {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            {
-                renderPost()
-            }
-            <View style={{ paddingBottom: 20 }}>
+        <>
+            <StatusBar barStyle='default' />
+            <ScrollView style={styles.container}>
                 {
-                    data.map((item, index) => <Item key={index} data={item} index={index} />)
+                    renderPost()
                 }
-            </View>
-        </ScrollView>
+                <View style={{ paddingBottom: 20 }}>
+                    {
+                        data.map((item, index) => <Item key={index} data={item} index={index} />)
+                    }
+                </View>
+            </ScrollView>
+        </>
     )
 }

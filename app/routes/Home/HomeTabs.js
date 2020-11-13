@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import Message from '../../pages/Home/Message/message.page';
-import Diary from '../../pages/Home/Diary/diary.page';
-import Dating from '../../pages/Home/Dating/dating.page';
-import Profile from '../../pages/Home/Profile/profile.page';
 import { BrandColor } from '../../utils/contants/colors.const';
+import MessageStack from './MessageStack';
+import DiaryStack from './DiaryStack';
+import DatingStack from './DatingStack';
+import ProfileStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,10 +36,10 @@ export default function HomeTabs() {
         })
       }
     >
-      <Tab.Screen name="Message" component={Message} />
-      <Tab.Screen name="Diary" component={Diary} />
-      <Tab.Screen name="Dating" component={Dating} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Message" component={MessageStack} />
+      <Tab.Screen name="Diary" component={DiaryStack} />
+      <Tab.Screen name="Dating" component={DatingStack} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   )
 }

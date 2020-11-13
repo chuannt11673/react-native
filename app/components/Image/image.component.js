@@ -3,7 +3,7 @@ import { Dimensions, Image } from 'react-native';
 import { styles } from './image.style';
 
 const windowWidth = Dimensions.get('window').width;
-export default function ImageComponent({ uri, width }) {
+export default function ImageComponent({ uri, width, containerStyle }) {
     const [inStyle, setStyle] = useState();
     width =  width ?? windowWidth;
     
@@ -19,7 +19,7 @@ export default function ImageComponent({ uri, width }) {
 
     return (
         <Image
-                style={[styles.container, inStyle ]}
+                style={[styles.container, inStyle, containerStyle ]}
                 source={{ uri: uri }}
                 resizeMode='cover'
         />

@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: BrandColor.white
     },
+    avatarStyle: {
+        borderWidth: 0
+    },
     reorderArea: {
         flexDirection: 'row',
         justifyContent: 'center',

@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import AuthContext from './app/utils/context/auth.context';
 import HomeStack from './app/routes/HomeStack';
 import AuthStack from './app/routes/AuthStack';
@@ -41,13 +41,16 @@ export default function App() {
   );
 
   return (
-    <Context.Provider value={authContext}>
-      <NavigationContainer>
-        {
-          !state.userToken ? <HomeStack /> : <AuthStack />
-        }
-      </NavigationContainer>
-    </Context.Provider> 
+    <>
+      <StatusBar barStyle='light-content'/>
+      <Context.Provider value={authContext}>
+        <NavigationContainer>
+          {
+            !state.userToken ? <HomeStack /> : <AuthStack />
+          }
+        </NavigationContainer>
+      </Context.Provider>
+    </>
   )
 }
 

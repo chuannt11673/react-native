@@ -18,7 +18,7 @@ export default function Profile() {
     const renderData = () => {
         return (
             <>
-                <ImageComponent uri={data.avatar} />
+                <ImageComponent uri={data.avatar} containerStyle={styles.avatarStyle} />
                 <View style={styles.reorderArea}>
                     <View style={styles.reorderTouchMove}>
                         <FontAwesome name='reorder' size={21} color={BrandColor.black} />
