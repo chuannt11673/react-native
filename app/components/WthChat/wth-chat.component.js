@@ -1,52 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { View, Keyboard, Text, ScrollView } from 'react-native';
+import { View, Keyboard, Text, ScrollView, SafeAreaView, Platform, Dimensions } from 'react-native';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import ButtonComponent from '../Button/button.component';
 
 import { styles } from './wth-chat.style';
 import { TextInput } from 'react-native';
 
+const windowHeight = Dimensions.get('window').height;
 export default function WthChatComponent() {
     const [displayContent, setDisplayContent] = useState(false);
-    const [displayKeyboard, setDisplayKeyboard] = useState(false);
-    const [keyboardHeight, setKeyboardHeight] = useState(0);
+    const [keyboardHeight, setKeyboardHeight] = useState(windowHeight * 0.35);
 
     useEffect(() => {
         Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
-        Keyboard.addListener('keyboardWillHide', _keyboardWillHide);
-
         return () => {
             Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
-            Keyboard.removeListener('keyboardWillHide', _keyboardWillHide);
         }
     }, []);
 
     const _keyboardDidShow = (event) => {
-        _setKeyboardHeight(event);
-        setDisplayContent(false);
-        setDisplayKeyboard(true);
-    };
-
-    const _keyboardWillHide = () => {
-        setDisplayKeyboard(false);
-    };
-
-    const _setKeyboardHeight = (event) => {
-        const height = event.endCoordinates.height;
+        const height = Platform.OS === 'ios' ? event.endCoordinates.height - 32 : event.endCoordinates.height;
         setKeyboardHeight(height);
     }
 
-    const emojiHandler = (event) => {
-        if (displayKeyboard)
-            Keyboard.dismiss();
+    const emojiHandler = () => {
+        Keyboard.dismiss();
         setDisplayContent(!displayContent);
     };
 
+    const renderContent = () => {
+        if (!displayContent)
+            return null;
+
+        return (
+            <ScrollView style={{ height: keyboardHeight }}>
+                <View>
+                    <Text>Content here</Text>
+                </View>
+            </ScrollView>
+        )
+    }
+
 
     return (
-        <View
-            style={[styles.container, { paddingBottom: displayKeyboard ? keyboardHeight : 20 }]}
-        >
+        <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerLeft}>
                     <ButtonComponent
@@ -60,7 +57,10 @@ export default function WthChatComponent() {
                     <TextInput
                         style={styles.textInput}
                         placeholder='Cảm xúc / Hoạt động'
-                        autoFocus={true}
+                        autoFocus={false}
+                        onFocus={
+                            () => setDisplayContent(false)
+                        }
                     />
                 </View>
                 <View style={styles.headerRight}>
@@ -77,14 +77,8 @@ export default function WthChatComponent() {
                 </View>
             </View>
             {
-                displayContent && !displayKeyboard ? (
-                    <ScrollView style={{ height: keyboardHeight - 20 }}>
-                        <View>
-                            <Text>Content here</Text>
-                        </View>
-                    </ScrollView>
-                ) : null
+                renderContent()
             }
-        </View>
+        </SafeAreaView>
     )
 }
