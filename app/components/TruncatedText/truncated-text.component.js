@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { styles } from './truncated-text.style';
 
 export default function TruncatedTextComponent({ text }) {
@@ -9,7 +9,7 @@ export default function TruncatedTextComponent({ text }) {
     useEffect(() => {
         if (text.length > maxLength) {
             const tempText = text.slice(0, maxLength);
-            setText(tempText + '...');
+            setText(tempText + '... ');
         }
     }, []);
 
@@ -23,9 +23,9 @@ export default function TruncatedTextComponent({ text }) {
         }
 
         return (
-            <TouchableOpacity onPress={pressHandler}>
-                <Text style={styles.viewMore}>Xem thêm</Text>
-            </TouchableOpacity>
+            <>
+                <Text style={styles.viewMore} onPress={ pressHandler }>Xem thêm</Text>
+            </>
         )
     }
 

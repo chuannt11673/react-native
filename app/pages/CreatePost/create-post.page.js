@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, View, TextInput, StatusBar } from 'react-native';
+import { ScrollView, Text, View, TextInput, StatusBar, Platform } from 'react-native';
 import { styles } from './create-post.style';
 import AvatarComponent from '../../components/Avatar/avatar.component';
 import ButtonComponent from '../../components/Button/button.component';
@@ -9,6 +9,7 @@ import { BrandColor } from '../../utils/contants/colors.const';
 
 export default function CreatePost({ navigation }) {
     const [text, setText] = useState('');
+    const [images, setImages] = useState([]);
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -30,7 +31,9 @@ export default function CreatePost({ navigation }) {
 
     return (
         <>
-            <StatusBar barStyle='default' />
+            {
+                Platform.OS === 'ios' ? <StatusBar barStyle='dark-content' /> : <StatusBar barStyle='dark-content' backgroundColor='white' />
+            }
             <ScrollView style={styles.container}>
                 <View style={styles.header}>
                     <AvatarComponent
@@ -90,11 +93,7 @@ export default function CreatePost({ navigation }) {
                     />
                 </View>
                 <ImageGridComponent
-                    images={[
-                        'https://images.unsplash.com/photo-1564419429381-98dbcf916478?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                        'https://images.unsplash.com/photo-1570651851409-93d5add773d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
-                    ]}
+                    images={images}
                 />
 
             </ScrollView>

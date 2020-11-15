@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, StatusBar, TouchableOpacity, Platform } from 'react-native';
 import { Text, View } from 'react-native';
 import AvatarComponent from '../../components/Avatar/avatar.component';
 import ButtonComponent from '../../components/Button/button.component';
@@ -102,7 +102,9 @@ export default function Comment({ route }) {
 
     return (
         <>
-            <StatusBar barStyle='default' />
+            {
+                Platform.OS === 'ios' ? <StatusBar barStyle='dark-content' /> : <StatusBar barStyle='dark-content' backgroundColor='white' />
+            }
             <ScrollView style={styles.container}>
                 {
                     renderPost()

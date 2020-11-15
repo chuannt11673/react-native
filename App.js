@@ -42,11 +42,10 @@ export default function App() {
 
   return (
     <>
-      <StatusBar barStyle='light-content'/>
       <Context.Provider value={authContext}>
         <NavigationContainer>
           {
-            !state.userToken ? <HomeStack /> : <AuthStack />
+            state.userToken ? <HomeStack /> : <AuthStack />
           }
         </NavigationContainer>
       </Context.Provider>

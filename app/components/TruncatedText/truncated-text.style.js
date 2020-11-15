@@ -3,8 +3,6 @@ import { BrandColor } from '../../utils/contants/colors.const';
 
 export const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
         backgroundColor: BrandColor.white,
     },
     text: {
@@ -14,8 +12,5 @@ export const styles = StyleSheet.create({
     },
     viewMore: {
         color: BrandColor.secondary,
-        left: 3,
-        top: 3,
-        textDecorationLine: 'underline'
-    }
+    },
 })

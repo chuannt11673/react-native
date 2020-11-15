@@ -19,6 +19,9 @@ export default function ImageGridComponent({ images }) {
     };
 
     useEffect(() => {
+        if (images.length === 0)
+            return;
+            
         Image.getSize(images[0], (w,h) => {
             if (w <= h) {
                 mode = modes.vertical;

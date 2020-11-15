@@ -21,6 +21,7 @@ export default function DiaryStack() {
                         color: BrandColor.white,
                         fontSize: 18
                     },
+                    headerTitleAlign: 'center',
                     headerLeft: () => (
                         <ButtonComponent
                             buttonStyle={{ backgroundColor: BrandColor.primary }}

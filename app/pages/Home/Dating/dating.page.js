@@ -1,11 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { BrandColor } from '../../../utils/contants/colors.const';
 
 export default function Dating() {
     return (
-        <View>
-            <Text>Dating</Text>
-        </View>
+        <>
+            <StatusBar barStyle='light-content' backgroundColor={BrandColor.primary} translucent={true} />
+            <View>
+                <Text>Dating</Text>
+            </View>
+        </>
     )
 }
 

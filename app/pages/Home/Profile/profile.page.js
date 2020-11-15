@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, StatusBar } from 'react-native';
 import { styles } from './profile.style';
 import * as profileService from '../../../utils/services/profile.service';
 import ImageComponent from '../../../components/Image/image.component';
@@ -18,6 +18,7 @@ export default function Profile() {
     const renderData = () => {
         return (
             <>
+                <StatusBar barStyle='light-content' backgroundColor='transparent' translucent={true} />
                 <ImageComponent uri={data.avatar} containerStyle={styles.avatarStyle} />
                 <View style={styles.reorderArea}>
                     <View style={styles.reorderTouchMove}>

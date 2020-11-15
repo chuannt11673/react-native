@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     content: {
-        padding: 10
+        padding: 10,
     },
     action: {
         flexDirection: 'row',
