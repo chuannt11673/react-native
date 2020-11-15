@@ -29,6 +29,9 @@ export default function CreatePost({ navigation }) {
         });
     }, [navigation]);
 
+    const selectImageHandler = () => {
+    }
+
     return (
         <>
             {
@@ -81,6 +84,7 @@ export default function CreatePost({ navigation }) {
                         icon={
                             <FontAwesome5 name="file-image" size={17} color="#00b300" />
                         }
+                        onPress={selectImageHandler}
                     />
                     <ButtonComponent
                         containerStyle={styles.buttonContainer}

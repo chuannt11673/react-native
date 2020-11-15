@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StatusBar, Platform, ScrollView, Image, Text } from 'react-native';
+import WthChatComponent from '../../components/WthChat/wth-chat.component';
 import { getChats } from '../../utils/services/chat.service';
 import { styles } from './chat.style';
 
@@ -55,6 +56,7 @@ export default function Chat({ route }) {
                     })
                 }
             </ScrollView>
+            <WthChatComponent />
         </>
     )
 }
