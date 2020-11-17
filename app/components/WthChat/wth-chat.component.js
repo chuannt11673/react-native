@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Keyboard, Text, ScrollView, SafeAreaView, Platform, Dimensions } from 'react-native';
+import { View, Keyboard, SafeAreaView, Platform, Dimensions } from 'react-native';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import ButtonComponent from '../Button/button.component';
+import EmojiSelector, { Categories } from 'react-native-emoji-selector';
 
 import { styles } from './wth-chat.style';
 import { TextInput } from 'react-native';
@@ -10,6 +11,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function WthChatComponent() {
     const [displayContent, setDisplayContent] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(windowHeight * 0.35);
+    const [textValue, setTextValue] = useState('');
 
     useEffect(() => {
         Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
@@ -33,11 +35,16 @@ export default function WthChatComponent() {
             return null;
 
         return (
-            <ScrollView style={{ height: keyboardHeight }}>
-                <View>
-                    <Text>Content here</Text>
-                </View>
-            </ScrollView>
+            <View style={{ height: keyboardHeight }}>
+                <EmojiSelector
+                    category={Categories.history}
+                    showSearchBar={false}
+                    showSectionTitles={false}
+                    onEmojiSelected={
+                        (emoji) => setTextValue(`${textValue} ${emoji}`)
+                    }
+                />
+            </View>
         )
     }
 
@@ -55,11 +62,15 @@ export default function WthChatComponent() {
                         }
                     />
                     <TextInput
+                        value={textValue}
                         style={styles.textInput}
                         placeholder='Cảm xúc / Hoạt động'
                         autoFocus={false}
-                        onFocus={
+                        onTouchStart={
                             () => setDisplayContent(false)
+                        }
+                        onChangeText={
+                            (text) => setTextValue(text)
                         }
                     />
                 </View>

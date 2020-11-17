@@ -25,7 +25,8 @@ export const styles = StyleSheet.create({
         color: BrandColor.secondary
     },
     textInput: {
-        marginLeft: 10
+        marginLeft: 10,
+        minWidth: 200
     },
     imageIcon: {
         color: '#00b300',
