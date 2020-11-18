@@ -6,7 +6,7 @@ import EmojiSelector, { Categories } from 'react-native-emoji-selector';
 import { styles } from './funny-chat.style';
 import { Button } from 'react-native-elements';
 
-export default function WthChatComponent() {
+export default function FunnyChatComponent() {
     const [textValue, setTextValue] = useState('');
     const [initialHeight, setInitialHeight] = useState(0);
     const [height, setKeyboardHeight] = useState(0);

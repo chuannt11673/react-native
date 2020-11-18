@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     header: {
-        borderBottomColor: BrandColor.borderColor,
+        borderBottomColor: '#f2f2f2',
         borderBottomWidth: 5
     },
     headerAvatar: {
@@ -35,8 +35,13 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     headerContainer: {
-        width: windowWidth / 2,
-        borderWidth: 1,
-        borderColor: BrandColor.borderColor
+        width: windowWidth / 3,
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderColor: BrandColor.borderColor,
+        borderRadius: 0
+    },
+    headerTitleStyle: {
+        fontSize: 13
     }
 })

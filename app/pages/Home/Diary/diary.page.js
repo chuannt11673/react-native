@@ -75,15 +75,25 @@ export default function Diary({ navigation }) {
                         <ButtonComponent
                             containerStyle={styles.headerContainer}
                             title='Photo'
+                            titleStyle={styles.headerTitleStyle}
                             icon={
-                                <FontAwesome name="file-image-o" size={21} color="#00b300" />
+                                <FontAwesome name="file-image-o" size={19} color="#00b300" />
                             }
                         />
                         <ButtonComponent
                             containerStyle={styles.headerContainer}
                             title='Video'
+                            titleStyle={styles.headerTitleStyle}
                             icon={
-                                <FontAwesome name="video-camera" size={21} color="#ff1ac6" />
+                                <FontAwesome name="video-camera" size={19} color="#ff1ac6" />
+                            }
+                        />
+                        <ButtonComponent
+                            containerStyle={styles.headerContainer}
+                            title='Paint'
+                            titleStyle={styles.headerTitleStyle}
+                            icon={
+                                <FontAwesome name="paint-brush" size={19} color="#ff1ac6" />
                             }
                         />
                     </View>
