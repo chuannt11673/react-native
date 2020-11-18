@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { BrandColor } from '../../utils/contants/colors.const';
 
+const windowWidth = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
     container: {
         borderTopWidth: 1,
@@ -36,5 +37,15 @@ export const styles = StyleSheet.create({
     },
     content: {
         minHeight: 200
+    },
+    imagesContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    image: {
+        width: windowWidth * 0.333,
+        height: windowWidth * 0.333,
+        borderWidth: 1,
+        borderColor: BrandColor.white
     }
 })
