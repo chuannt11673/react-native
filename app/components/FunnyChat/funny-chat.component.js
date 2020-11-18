@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Keyboard, SafeAreaView, Animated, TextInput } from 'react-native';
+import { View, Keyboard, Animated, TextInput } from 'react-native';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import ButtonComponent from '../Button/button.component';
 import EmojiSelector, { Categories } from 'react-native-emoji-selector';
@@ -8,14 +8,16 @@ import { Button } from 'react-native-elements';
 
 export default function WthChatComponent() {
     const [textValue, setTextValue] = useState('');
-    const [height, setKeyboardHeight] = useState(336);
+    const [initialHeight, setInitialHeight] = useState(0);
+    const [height, setKeyboardHeight] = useState(0);
+    const [isKeyboardShown, setKeyboardShown] = useState(false);
+    const inputRef = React.createRef();
 
     const animatedHeight = useRef(new Animated.Value(0)).current;
-
     useEffect(() => {
         Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
+        Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
         _chatToggle();
-
         return () => {
             Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
             Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
@@ -23,11 +25,14 @@ export default function WthChatComponent() {
     }, [height]);
 
     const _keyboardDidShow = (event) => {
+        if (initialHeight === 0)
+            setInitialHeight(event.endCoordinates.height);
         setKeyboardHeight(event.endCoordinates.height);
+        setKeyboardShown(true);
     }
 
-    const _keyboardDidHide = (event) => {
-        setKeyboardHeight(0);
+    const _keyboardDidHide = () => {
+        setKeyboardShown(false);
     }
 
     const _chatToggle = () => {
@@ -42,7 +47,7 @@ export default function WthChatComponent() {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerLeft}>
                     <Button
@@ -51,10 +56,22 @@ export default function WthChatComponent() {
                             <AntDesign name="user" size={23} style={styles.emojiIcon} />
                         }
                         onPress={
-                            () => setKeyboardHeight(0)
+                            () => {
+                                if (height > 0) {
+                                    if (isKeyboardShown) {
+                                        Keyboard.dismiss();
+                                        return;
+                                    }
+
+                                    setKeyboardHeight(0);
+                                } else {
+                                    setKeyboardHeight(initialHeight);
+                                }
+                            }
                         }
                     />
                     <TextInput
+                        ref={inputRef}
                         value={textValue}
                         style={styles.textInput}
                         placeholder='Cảm xúc / Hoạt động'
@@ -82,7 +99,7 @@ export default function WthChatComponent() {
                     height: animatedHeight,
                 }}
                 data={[
-                    { id: 1 }
+                    { id: '1' }
                 ]}
                 keyExtractor={
                     item => item.id
@@ -93,14 +110,14 @@ export default function WthChatComponent() {
                             category={Categories.emotion}
                             showSearchBar={false}
                             showSectionTitles={false}
+                            showTabs={false}
                             onEmojiSelected={
-                                (emoji) => setTextValue(`${textValue} ${emoji}`)
+                                (emoji) => setTextValue(`${textValue}${emoji}`)
                             }
                         />
                     )
                 }
             />
-                
-        </SafeAreaView>
+        </View>
     )
 }
