@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, View, TextInput, StatusBar, Platform } from 'react-native';
+import { ScrollView, Text, View, TextInput, StatusBar, Platform, KeyboardAvoidingView } from 'react-native';
 import { styles } from './create-post.style';
 import AvatarComponent from '../../components/Avatar/avatar.component';
 import ButtonComponent from '../../components/Button/button.component';
 import { Fontisto, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import ImageGridComponent from '../../components/ImageGrid/image-grid.component';
 import { BrandColor } from '../../utils/contants/colors.const';
+import FunnyChatComponent from '../../components/FunnyChat/funny-chat.component';
 
 export default function CreatePost({ navigation }) {
     const [text, setText] = useState('');
@@ -101,6 +102,7 @@ export default function CreatePost({ navigation }) {
                 />
 
             </ScrollView>
+            <FunnyChatComponent />
         </>
     )
 }

@@ -2,9 +2,11 @@ import React from 'react';
 import { Button } from 'react-native-elements';
 import { styles } from './button.style';
 
-export default function ButtonComponent({ title, icon, onPress, onPressIn, containerStyle, buttonStyle, titleStyle }) {
+export default function ButtonComponent({ title, icon, onPress, containerStyle, buttonStyle, titleStyle }) {
     const defaultHandler = (e) => {
-        console.log('please handle event');
+        if (onPress) {
+            onPress(e);
+        }
     }
     
     return (
@@ -15,10 +17,7 @@ export default function ButtonComponent({ title, icon, onPress, onPressIn, conta
             title={title}
             icon={icon}
             onPress={
-                (e) => onPress ? onPress(e) : defaultHandler
-            }
-            onPressIn={
-                (e) => onPressIn ? onPressIn(e) : defaultHandler
+                defaultHandler
             }
         />
     )
