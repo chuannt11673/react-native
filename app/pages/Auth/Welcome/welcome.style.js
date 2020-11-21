@@ -5,32 +5,70 @@ const windowWidth = Dimensions.get('window').width;
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center',        
+        backgroundColor: BrandColor.white
     },
-    background: {
-        flex: 1,
-        width: windowWidth,
-        justifyContent: 'center'
+    header: {
+        fontSize: 21,
+        fontWeight: '600'
+    },
+    forgotPassword: {
+        width: '79%',
+        alignItems: 'flex-end'
+    },
+    forgotPasswordText: {
+        color: '#3333ff'
+    },
+    loginButtonContainer: {
+        width: '79%',
+        marginTop: 30
     },
     loginButton: {
-        backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderColor: BrandColor.white,
-        borderRadius: 8,
-        width: 160,
-        alignSelf: 'center'
+        backgroundColor: BrandColor.primary,
+        borderRadius: 20,
+        height: 50
     },
-    loginTitle: {
-        color: BrandColor.white
+    otherLoginText: {
+        marginTop: 30,
+        fontSize: 16
     },
-    externalLogin: {
-        margin: 5,
-        backgroundColor: 'transparent',
+    externalLoginContainer: {
+        width: '79%',
+        flexDirection: 'row',
+        marginTop: 20,
+        justifyContent: 'space-around'
+    },
+    externalLoginButton: {
+        borderRadius: 12,
         borderWidth: 1,
-        borderColor: BrandColor.white,
-        width: 46,
-        height: 46,
-        borderRadius: 23
+        borderColor: '#999999',
+        backgroundColor: BrandColor.white
+    },
+    registerContainer: {
+        marginTop: 20,
+        flexDirection: 'row'
+    },
+    registerButtonText: {
+        color: BrandColor.primary
     }
 })
+
+export const textInput = StyleSheet.create({
+    container: {
+        borderWidth: 1,
+        borderColor: '#999999',
+        borderRadius: 20,
+        height: 51,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 8,
+        width: '80%'
+    },
+    input: {
+        width: '80%',
+        height: 40,
+        marginLeft: 5
+    }
+})
+

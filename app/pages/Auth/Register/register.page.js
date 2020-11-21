@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, TextInput, Image, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
-import AuthContext from '../../../utils/context/auth.context';
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, SafeAreaView } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
-import * as styles from './welcome.style';
+import * as styles from './register.style';
 import { Button } from 'react-native-elements';
 
 const eyeIcons = {
@@ -36,28 +35,26 @@ function FunnyTextInput({ placeholder, leftIcon, rightIcon, secureTextEntry, con
     )
 }
 
-export default function WelcomePage({ navigation }) {
+export default function RegisterPage({ navigation }) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+    const [isMatched, setIsMatched] = useState(false);
     const [securePassword, setSecurePassword] = useState(true);
     const [eyeIconName, setEyeIconName] = useState(eyeIcons.off);
 
-    const { signIn } = React.useContext(AuthContext);
-
-    const signInHandler = () => {
-        signIn(username, password);
-    }
-
-    const register = () => {
-        navigation.navigate('Register');
+    const signupHandler = () => {
+        if (!username || !password || !isMatched)
+            return;
+            
+        navigation.navigate('Welcome');
     }
 
     return (
-        <TouchableWithoutFeedback onPress={
-            Keyboard.dismiss
-        }>
-            <SafeAreaView style={styles.styles.container}>
-                <Text style={styles.styles.header}>Đăng nhập</Text>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView
+                style={styles.styles.container}
+            >
+                <Text style={styles.styles.header}>Đăng ký</Text>
                 <FunnyTextInput
                     placeholder='Email hoặc số điện thoại'
                     leftIcon={
@@ -101,72 +98,38 @@ export default function WelcomePage({ navigation }) {
                         (value) => setPassword(value)
                     }
                 />
-                <View style={styles.styles.forgotPassword}>
-                    <Text style={styles.styles.forgotPasswordText}>Quên mật khẩu?</Text>
-                </View>
+                <FunnyTextInput
+                    placeholder='Nhập lại mật khẩu'
+                    leftIcon={
+                        <AntDesign name="lock" size={24} color="#666666" />
+                    }
+                    rightIcon={
+                        isMatched ? <AntDesign name="checkcircle" size={24} color="#00e600" /> : null
+                    }
+                    containerStyle={{
+                        marginBottom: 15
+                    }}
+                    inputStyle={{
+                        width: '80%',
+                        fontSize: 16
+                    }}
+                    secureTextEntry={securePassword}
+                    onChangeText={
+                        (value) => {
+                            const match = value === password;
+                            setIsMatched(match);
+                        }
+                    }
+                />
                 <Button
-                    title='Đăng nhập'
+                    title='Đăng ký'
                     containerStyle={styles.styles.loginButtonContainer}
                     buttonStyle={styles.styles.loginButton}
                     onPress={
-                        signInHandler
+                        signupHandler
                     }
                 />
-                <Text style={styles.styles.otherLoginText}>Hoặc đăng nhập với...</Text>
-                <View style={styles.styles.externalLoginContainer}>
-                    <Button
-                        title='Google'
-                        icon={
-                            <Image
-                                source={require('../../../assets/images/icons8-google-48.png')}
-                                style={{
-                                    width: 30,
-                                    height: 30
-                                }}
-                            />
-                        }
-                        titleStyle={{
-                            marginLeft: 8,
-                            color: 'black'
-                        }}
-                        buttonStyle={styles.styles.externalLoginButton}
-                    />
-                    <Button
-                        title='Facebook'
-                        icon={
-                            <Image
-                                source={require('../../../assets/images/icons8-facebook-circled-48.png')}
-                                style={{
-                                    width: 30,
-                                    height: 30
-                                }}
-                            />
-                        }
-                        titleStyle={{
-                            marginLeft: 8,
-                            color: 'black'
-                        }}
-                        buttonStyle={styles.styles.externalLoginButton}
-                    />
-                </View>
-                <View style={styles.styles.registerContainer}>
-                    <Text>
-                        Bạn chưa có tài khoản?
-                </Text>
-                    <TouchableOpacity
-                        style={{
-                            marginLeft: 6
-                        }}
-                        onPress={
-                            register
-                        }
-                    >
-                        <Text style={styles.styles.registerButtonText}>Đăng ký</Text>
-                    </TouchableOpacity>
-                </View>
-
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
 }
-
